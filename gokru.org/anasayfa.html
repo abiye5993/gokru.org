@@ -1,0 +1,450 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>gokru.org</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5faf7;
+    color: #222;
+}
+
+/* ÜST KISIM */
+
+header {
+    background: white;
+    border-bottom: 3px solid #159447;
+    padding: 18px 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    color: #087532;
+}
+
+.logo span {
+    color: #159447;
+}
+
+/* ANA ALAN */
+
+.container {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* BAŞLIK */
+
+h1 {
+    color: #174d2b;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 35px;
+}
+
+/* ARAMA */
+
+.search-box {
+    display: flex;
+    max-width: 650px;
+    margin: auto;
+}
+
+.search-box input {
+    flex: 1;
+
+    height: 52px;
+
+    border: 2px solid #159447;
+    border-right: none;
+
+    border-radius: 7px 0 0 7px;
+
+    padding: 0 18px;
+
+    font-size: 17px;
+
+    outline: none;
+}
+
+.search-box input:focus {
+    box-shadow: 0 0 0 3px rgba(21,148,71,.15);
+}
+
+.search-box button {
+    width: 110px;
+
+    border: none;
+
+    background: #159447;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    border-radius: 0 7px 7px 0;
+
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #087532;
+}
+
+/* SONUÇ ALANI */
+
+#results {
+    max-width: 650px;
+
+    margin: 30px auto;
+
+    text-align: left;
+}
+
+/* SONUÇ */
+
+.result {
+    background: white;
+
+    border: 1px solid #d5e4da;
+
+    border-left: 5px solid #159447;
+
+    border-radius: 6px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+}
+
+.result h2 {
+    margin: 0 0 8px;
+
+    color: #087532;
+
+    font-size: 20px;
+}
+
+.result p {
+    margin: 0;
+
+    color: #555;
+
+    line-height: 1.6;
+}
+
+/* BULUNAMADI */
+
+.not-found {
+    background: #fff;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: #777;
+}
+
+.not-found strong {
+    display: block;
+
+    color: #444;
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+}
+
+/* ALT */
+
+footer {
+    margin-top: 100px;
+
+    padding: 25px;
+
+    background: #103d24;
+
+    color: white;
+
+    text-align: center;
+}
+
+footer p {
+    color: #c8ddd0;
+    margin: 7px;
+}
+
+
+/* MOBİL */
+
+@media(max-width: 600px) {
+
+    header {
+        padding: 15px 20px;
+    }
+
+    .container {
+        margin-top: 45px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box button {
+        width: 90px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        gokru<span>.org</span>
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+    <h1>gokru.org</h1>
+
+    <div class="description">
+        Bilgiye hızlı ve kolay ulaşın.
+    </div>
+
+
+    <!-- ARAMA -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Ne aramak istiyorsunuz?"
+            autocomplete="off"
+        >
+
+        <button onclick="search()">
+            Ara
+        </button>
+
+    </div>
+
+
+    <!-- SONUÇLAR -->
+
+    <div id="results"></div>
+
+
+</div>
+
+
+
+<footer>
+
+    <strong>gokru.org</strong>
+
+    <p>
+        Bilgi arama platformu
+    </p>
+
+</footer>
+
+
+
+<script>
+
+/*
+    SİTEDEKİ MADDELER
+
+    Buraya yeni bilgiler ekleyebilirsin.
+
+    Örnek:
+
+    {
+        title: "Türkiye",
+        text: "Türkiye hakkında bilgi..."
+    }
+*/
+
+const data = [
+
+    {
+        title: "Türkiye",
+        text: "Türkiye, Avrupa ve Asya arasında yer alan bir ülkedir."
+    },
+
+    {
+        title: "İstanbul",
+        text: "İstanbul, Türkiye'nin en büyük şehirlerinden biridir."
+    },
+
+    {
+        title: "Ankara",
+        text: "Ankara, Türkiye'nin başkenti ve önemli bir kültür merkezidir."
+    },
+
+    {
+        title: "Bilgisayar",
+        text: "Bilgisayar, verileri işleyen elektronik bir cihazdır."
+    },
+
+    {
+        title: "İnternet",
+        text: "İnternet, dünya çapında birbirine bağlı bilgisayar ağlarının oluşturduğu sistemdir."
+    }
+
+];
+
+
+
+function search() {
+
+    const input =
+        document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const results =
+        document.getElementById("results");
+
+
+    /* BOŞ ARAMA */
+
+    if (input === "") {
+
+        results.innerHTML = `
+            <div class="not-found">
+                <strong>Arama yapın</strong>
+                Lütfen aramak istediğiniz kelimeyi yazın.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    /* ARAMA */
+
+    const found =
+        data.filter(item =>
+
+            item.title
+                .toLowerCase()
+                .includes(input)
+
+            ||
+
+            item.text
+                .toLowerCase()
+                .includes(input)
+
+        );
+
+
+    /* SONUÇ YOK */
+
+    if (found.length === 0) {
+
+        results.innerHTML = `
+            <div class="not-found">
+
+                <strong>Sonuç bulunamadı.</strong>
+
+                "${input}" için herhangi bir sonuç bulunamadı.
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    /* SONUÇLARI GÖSTER */
+
+    results.innerHTML = found.map(item => `
+
+        <div class="result">
+
+            <h2>
+                ${item.title}
+            </h2>
+
+            <p>
+                ${item.text}
+            </p>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+
+/* ENTER TUŞU */
+
+document
+.getElementById("searchInput")
+.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+        search();
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
+```
